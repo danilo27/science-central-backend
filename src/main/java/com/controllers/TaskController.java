@@ -86,9 +86,7 @@ public class TaskController {
     }
 	
 	public Map<String, String> getAllActiveActivities(String processInstanceId) {
-	    // get engine services
-	     
-
+ 
 	    // get the process instance
 	    ProcessInstance processInstance =
 	        runtimeService.createProcessInstanceQuery()
@@ -126,13 +124,7 @@ public class TaskController {
 	@GetMapping("/getTasks")
 	public List<Task> getTasks(HttpServletRequest request){
 		List<Task> lista=taskService.createTaskQuery().active().taskAssignee(request.getHeader("username")).list();
-		return lista;
-		//return taskService.createTaskQuery().taskAssignee("localhost").list();
+		return lista; 
 	}
-	
-	
-	
-	
-	
-	
+ 
 }

@@ -168,10 +168,6 @@ public class PaperController {
 		
 		List<RestDto> retrievedTasksForAssignee = new ArrayList<>();
  
-//		Paper paper = paperRepo.findById(Long.parseLong(paperId)).orElse(null);
-//		paper.setStatus(Status.REVIEW);
-//		paperRepo.save(paper);
- 
 		ResponseEntity responseClaim;
 		ResponseEntity responseComplete;
 		

@@ -60,16 +60,10 @@ public class RoleCheck implements JavaDelegate{
 		System.out.println("user role: " + user.getRole());
 		System.out.println("role sef : " +Role.CHIEF_EDITOR.toString());
 		if(user.getRole().toString().equals(Role.AUTHOR.toString())){
-			runtimeService.setVariable(execution.getId(), "role", Role.AUTHOR.toString());
-			//runtimeService.setVariable(execution.getId(), "data", (List<Magazine>)magazineService.findAll());
+			runtimeService.setVariable(execution.getId(), "role", Role.AUTHOR.toString()); 
 		} else if(user.getRole().toString().equals(Role.CHIEF_EDITOR.toString())){
- 
 			System.out.println("Logged in as CHIEF. Preparing tasks...");
-			runtimeService.setVariable(execution.getId(), "role", Role.CHIEF_EDITOR.toString());
-			List<Paper> new_papers = new ArrayList<Paper>();
-			
-			
-			
+			runtimeService.setVariable(execution.getId(), "role", Role.CHIEF_EDITOR.toString());	
 		} else if(user.getRole().toString().equals(Role.EDITOR.toString())){
 			runtimeService.setVariable(execution.getId(), "role", Role.EDITOR.toString());
 		} else if(user.getRole().toString().equals(Role.REVIEWER.toString())){

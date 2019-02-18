@@ -383,14 +383,7 @@ public class EditorController {
 			}
 		}
 		
-		
-		
-//		
-//		HashMap<String, Object> map = this.mapListToDto(fdto);
-//		formService.submitTaskForm(taskId, map);
- 
-		
-        return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
     }
  
 	public List<RestDto> getTaskForAssignee(String username){

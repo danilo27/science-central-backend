@@ -114,11 +114,9 @@ public class BooksController {
 			      String filename=helper.saveUploadedFile(file);
 			      mmap.put("filename", filename);
 			      return mmap;
-			    } else {
-			      //System.out.println("XML Metadata: " + new String(reader.getMetadata()));
+			    } else { 
 			      @SuppressWarnings("unchecked")
-			      HashMap<String, String> map=reader.getInfo();
-			      //System.out.println(System.getProperty("user.dir"));
+			      HashMap<String, String> map=reader.getInfo(); 
 			      String filename=helper.saveUploadedFile(file);
 			      map.put("filename", filename);
 			      System.out.println(map.keySet());

@@ -52,13 +52,7 @@ public class ReviewerController {
 	
 	@Autowired
 	CredentialsService credService;
-	
-	/**
-	 * 
-	 * db services
-	 * 
-	 */
-	
+ 
 	@Autowired
 	MagazineService magazineService;
 	

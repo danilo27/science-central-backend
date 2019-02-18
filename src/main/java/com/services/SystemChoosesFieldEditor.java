@@ -71,10 +71,9 @@ public class SystemChoosesFieldEditor implements JavaDelegate{
 				
 				if(true){
 					
-				//TODO change to real field check
+				//TODO change to real field check and change editor type in db
 				//if(editor.getFieldOfWork().getCode().equals(newPaper.getField().getCode())){
-				 
-					//TODO promeni u mejl editora...
+
 					Email e = new Email();
 					e.setTo("testmailftn@gmail.com");
 					e.setFrom("testmailftn@gmail.com");

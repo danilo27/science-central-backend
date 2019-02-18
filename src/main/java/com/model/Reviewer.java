@@ -28,8 +28,7 @@ public class Reviewer implements Serializable{
     @GeneratedValue
     @Column(name = "ID")
     private Long id;
-
-    //Svi recenzenti kao i urednici moraju biti registrovani korisnici sistema.
+ 
     @OneToOne(optional = false)
     @JoinColumn(name = "USERNAME", unique = true)
     private Credentials user;
@@ -40,7 +39,6 @@ public class Reviewer implements Serializable{
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "REVIEWER_MAGAZINE", joinColumns = @JoinColumn(name = "REVIEWER"), inverseJoinColumns = @JoinColumn(name = "MAGAZINE"))
-    //Recenzenti mogu istovremeno biti angažovani u različitim časopisima, urednici ne.
     private Set<Magazine> magazines = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -53,9 +51,7 @@ public class Reviewer implements Serializable{
    
     
     public Reviewer(){}
-    
-    
-	
+ 
 	public Long getId() {
 		return id;
 	}

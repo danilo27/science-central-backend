@@ -13,24 +13,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "COMMENT")
 public class Comment implements Serializable{
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
     @Column(name = "ID")
     private Long id;
-	
-//	@OneToOne(optional = false)
-//    @JoinColumn(name = "AUTHOR", unique = true)
-//    private Credentials author;
-//	
-//	@OneToOne(optional = false)
-//    @JoinColumn(name = "CHIEF_EDITOR", unique = true)
-//    private Editor editor;
-	
+ 
 	@OneToOne(optional = false)
     @JoinColumn(name = "PAPER", unique = true)
     private Paper paper;

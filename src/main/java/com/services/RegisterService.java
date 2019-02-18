@@ -35,18 +35,9 @@ public class RegisterService implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution delegateExecution) throws Exception {
-		System.out.println("RegisterService JavaDelegate - execute");
-	    //String var = "pera";
-	    //var = var.toUpperCase();
-	    //execution.setVariable("input", var);
+ 
 	    List<FormSubmissionDto> registration = (List<FormSubmissionDto>)delegateExecution.getVariable("registration");
-	    //System.out.println("reg je: " + registration);
-	    //User user = identityService.newUser("");
-	   
-	    //identityService.saveUser(user);
-	   
-	    
-	    
+ 
 	    Author user = new Author();
 	    authorRepo.save(user);
 	    
@@ -57,13 +48,7 @@ public class RegisterService implements JavaDelegate{
 	    
 	    author.setRole(Role.AUTHOR);
 		 
-		
  
-		 
-	    
-		 
-		 
-		
 	    for (FormSubmissionDto formField : registration) {
 	    	System.out.println("->"+formField.getFieldId());
 	    	System.out.println("->"+formField.getFieldValue());

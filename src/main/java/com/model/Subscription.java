@@ -23,7 +23,7 @@ public class Subscription implements Serializable {
     @Column(name = "ID")
     private Long subId;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY) //vise pretplata na jednog usera moze
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER")
     private Credentials user;
 

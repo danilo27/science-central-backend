@@ -304,7 +304,7 @@ public class Data {
 		r3.setUserDetails(reviewer_details3);
 		r3.setMagazines(h1); 
 		//r3.setGeo_point(new GeoPoint(45.252640,19.873249)); //Petrovaradin
-//		
+		
 		revRepo.save(r1);
 		revRepo.save(r2);
 		revRepo.save(r3);

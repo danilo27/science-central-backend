@@ -52,8 +52,7 @@ public class Paper implements Serializable{
  
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "FIELD")
-    private FieldOfScience field; //bira se iz 1 oblast ponudjenih iz sifrarnika, prema tome
-    //mora biti posebna tabela za field, ne moze biti string
+    private FieldOfScience field;  
 
     @Column(name = "FILE", nullable = true)
     private Byte[] file;
@@ -66,14 +65,7 @@ public class Paper implements Serializable{
     
     @Column(name = "EDITOR", nullable = true) 
 	private String editor;
-    
-   // @ManyToOne(fetch = FetchType.LAZY, optional = false)
-   // @JoinColumns({
-           // @JoinColumn(name = "ISSUE_ISSN", referencedColumnName = "ISSN"),
-           // @JoinColumn(name = "ISSUE_EDITION", referencedColumnName = "EDITION")
-    //})
-   // private Issue issue;
-    
+ 
     @Column(name = "STATUS", nullable = true)
     @Enumerated(EnumType.STRING) 
     private Status status;

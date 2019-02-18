@@ -20,9 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "REVIEW")
 public class Review implements Serializable{
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L;
 
 	@Id

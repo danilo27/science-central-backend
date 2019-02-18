@@ -203,13 +203,8 @@ public class MainController {
 		return map;
 	}
 	
-	
-	
-	
-	
 	@PostMapping(path = "/register", produces = "application/json")
-    public @ResponseBody ResponseEntity register(@RequestBody RegisterDto dto) {
-		//User u 
+    public @ResponseBody ResponseEntity register(@RequestBody RegisterDto dto) { 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 	
@@ -235,10 +230,7 @@ public class MainController {
     		@PathVariable String processInstanceId,
     		@PathVariable String username
     		) {
-		
-		//List<Task> tasks = taskService.createTaskQuery().active().taskAssignee(username).list();
-		//Task task = taskService.createTaskQuery().active().processInstanceId(processInstanceId).taskAssignee(username).singleResult();
-		
+		 
 		List<RestDto> tasks = getTaskForAssignee(username);
 		RestDto task = null;
 		

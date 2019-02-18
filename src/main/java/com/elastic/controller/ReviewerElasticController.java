@@ -238,17 +238,10 @@ public class ReviewerElasticController {
 	public @ResponseBody ResponseEntity region() throws JsonParseException, JsonMappingException, IOException {
 		List<ReviewerIndexUnit> results = new ArrayList<ReviewerIndexUnit>();
 		ReviewerIndexUnit result = null;
-		
-		//vraca unutar kruga
+ 
 		GeoDistanceQueryBuilder qb = new GeoDistanceQueryBuilder("geo_point");
 		qb.point(45.297050,19.814990).distance(50, DistanceUnit.KILOMETERS); //NS - Milice Tomic 14
-		
-//		//vraca izvan kruga
-//		RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("geo_point");
-//		rangeQueryBuilder.from(new GeoPoint(45.297050,19.814990));
-//		rangeQueryBuilder.gt(50);
  
-		
 		SearchResponse response = elasticSearchTemplate.getClient().prepareSearch("revs").setQuery(qb).get();
 		 
 		for (SearchHit hit : response.getHits()) {

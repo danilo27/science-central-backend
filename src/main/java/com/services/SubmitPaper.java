@@ -90,13 +90,8 @@ public class SubmitPaper implements JavaDelegate{
 		newPaper = paperRepo.save(newPaper);
 		
 		runtimeService.setVariable(execution.getId(), "newPaper", newPaper);
-		
-		//runtimeService.setVariable(execution.getId(), "magazineType", m.getPaymentType().toString());
-		
-		//sistem bira glavnog urednika bas onog casopisa u koji je rad prijavljen 
+ 
 		runtimeService.setVariable(execution.getId(), "chief", m.getEditor().getCredentials().getUsername());
-		
-		
  
 		Email e = new Email();
 		e.setTo("testmailftn@gmail.com");

@@ -22,8 +22,7 @@ public class Editor implements Serializable{
     @GeneratedValue
     @Column(name = "ID")
     private Long id;
-    
-    //Svi recenzenti kao i urednici moraju biti registrovani korisnici sistema.
+
     @OneToOne(optional = false)
     @JoinColumn(name = "USERNAME", unique = true)
     private Credentials credentials;
@@ -32,9 +31,8 @@ public class Editor implements Serializable{
     @JoinColumn(name = "USER_DETAILS", unique = true)
     private UserDetails userDetails;
     
-    @ManyToOne //vise razlicitih editora za jedan casopis
-    @JoinColumn(name = "MAGAZINE")
-    //Recenzenti mogu istovremeno biti angažovani u različitim časopisima, urednici ne. U casopisu je lista editora SET!!!
+    @ManyToOne 
+    @JoinColumn(name = "MAGAZINE") 
     private Magazine magazine;
 
     @Column(name = "TITLE", length = 40, nullable = false)

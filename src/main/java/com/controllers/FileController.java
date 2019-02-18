@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lowagie.text.pdf.PdfReader;
 
+ 
+
 @RestController
 @RequestMapping(value = "/file")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,17 +37,14 @@ public class FileController {
 			      mmap.put("filename", filename);
 			      return mmap;
 			    } else {
-			      //System.out.println("XML Metadata: " + new String(reader.getMetadata()));
 			      @SuppressWarnings("unchecked")
 			      HashMap<String, String> map=reader.getInfo();
-			      //System.out.println(System.getProperty("user.dir"));
 			      String filename=saveUploadedFile(file);
 			      map.put("filename", filename);
 			      System.out.println(map.keySet());
 			      return map;
 			    }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -60,7 +59,6 @@ public class FileController {
     	String retVal = null;
         if (! file.isEmpty()) {
             byte[] bytes = file.getBytes();
-            //Path path = Paths.get(getResourceFilePath(DATA_DIR_PATH).getAbsolutePath() + File.separator + file.getOriginalFilename());
             Path path = Paths.get("C:/elastic_repo" + File.separator + file.getOriginalFilename());
             
             System.out.println(path);

@@ -36,7 +36,7 @@ public class ActiveSubCheck implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		Magazine magazine = (Magazine)execution.getVariable("magazine");
-		User user = (User)execution.getVariable("userFromSession"); //ovde je greska!!!
+		User user = (User)execution.getVariable("userFromSession");
 		List<Subscription> all = subService.findAll();
 		
 		runtimeService.setVariable(execution.getId(), "activeSubscription", false);
@@ -49,9 +49,6 @@ public class ActiveSubCheck implements JavaDelegate{
 			}
 		}
 		
-		/**
-		 * TODO SKLONI kad spojis sa PC-om
-		 */
 		runtimeService.setVariable(execution.getId(), "activeSubscription", true);
 		
  

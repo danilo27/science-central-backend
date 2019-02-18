@@ -82,8 +82,6 @@ public class ChiefEditorController {
 	@GetMapping(path = "/getAllPapersToReview/{username}", produces = "application/json")
     public @ResponseBody ResponseEntity<List<Paper>> getAllPapersToReview(
     		@PathVariable String username) {	 
-		//Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-		//String processInstanceId = task.getProcessInstanceId();
 		List<Paper> new_papers = new ArrayList<Paper>();
 		for(Paper paper : paperRepo.findAll()){
 			for(Magazine m : magazineService.findAll()){
@@ -91,7 +89,7 @@ public class ChiefEditorController {
 					if(paper.getWantedMagazine().equals(m.getIssn())){
 						if(paper.getStatus() == Status.NEW){
 							new_papers.add(paper);
-							break; //chief editor je chief editor samo za jedan magazin
+							break; 
 						}
 						
 					}

@@ -152,58 +152,13 @@ public class SearchController {
 			System.out.println(results.size());
 			return new ResponseEntity<List<ResultData>>(results, HttpStatus.OK);
 		}
-		
-		/*
-		private static String DATA_DIR_PATH;
-		
-		static {
-			ResourceBundle rb=ResourceBundle.getBundle("application");
-			DATA_DIR_PATH=rb.getString("dataDir");
-		}
-		
-		@Autowired
-		private Indexer indexer;
-		
-		@GetMapping("/reindex")
-		public ResponseEntity<String> index() throws IOException {
-			File dataDir = getResourceFilePath(DATA_DIR_PATH);
-			long start = new Date().getTime();
-			int numIndexed = indexer.index(dataDir);
-			long end = new Date().getTime();
-			String text = "Indexing " + numIndexed + " files took "
-					+ (end - start) + " milliseconds";
-			return new ResponseEntity<String>(text, HttpStatus.OK);
-		}
-		
-		private File getResourceFilePath(String path) {
-			System.out.println(path);
-		    URL url = this.getClass().getClassLoader().getResource(path);
-		    System.out.println(url);
-		    File file = null;
-		    try {
-		        file = new File(url.toURI());
-		    } catch (URISyntaxException e) {
-		        file = new File(url.getPath());
-		    }   
-		    return file;
-		}*/
-	
+ 
 		private String obradi(String s) {
 			String x=s.toLowerCase();
 			x=CyrillicLatinConverter.cir2lat(x);
 			return x;
 		}
-		
-		
-		
-		
-		
-//		@Autowired
-//		ElasticsearchOperations temp;
-//		
-//		@Autowired
-//		RestClient restClient;
-		
+ 	
 		@Autowired
 		RestHighLevelClient restHighLevelClient;
 		 
@@ -221,141 +176,16 @@ public class SearchController {
 				String sourceAsString = hit.getSourceAsString();
 				System.out.println("::"+sourceAsString);
 			}
-			
-			
-			//Obican Rest Client, nema mapiranja u objekte itd
-//			Map<String, String> paramMap = new HashMap<String, String>();
-//			paramMap.put("q", "text:horgoš");
-//			paramMap.put("pretty", "true");
-//			                               
-//			Response response = restClient.performRequest("GET", "/digitallibrary/_search",
-//			                                                           paramMap);
-//			System.out.println(EntityUtils.toString(response.getEntity()));
-//			System.out.println("Host -" + response.getHost() );
-//			System.out.println("RequestLine -"+ response.getRequestLine() );
-			
+ 		
+  
 		}
-		
-		
-		
-		
-		
-		
-		
-//		
-//		public ObjectMapper getHighlights(){
-//			HighlightBuilder hb = new HighlightBuilder();
-//			
-//			SearchResponse response = elasticSearchTemplate.getClient().prepareSearch("scientificpaper").highlighter(hb)
-//					.setQuery(qb).get();
-//
-//			for (SearchHit o : response.getHits()) {
-//				ObjectMapper objectMapper = new ObjectMapper();
-//				ScientificPaperDTO result = null;
-//
-//				try {
-//					result = objectMapper.readValue(o.getSourceAsString(), ScientificPaperDTO.class);
-//
-//					// Dinamicki sazetak - Highlighter
-//					for (String item : o.getHighlightFields().keySet()) {
-//						if (item.equals("pdfText"))
-//							result.setPdfText(o.getHighlightFields().get("pdfText").fragments()[0].string());
-//
-//						if (item.equals("keywords"))
-//							result.setKeywords(o.getHighlightFields().get("keywords").fragments()[0].string());
-//
-//						if (item.equals("title"))
-//							result.setTitle(o.getHighlightFields().get("title").fragments()[0].string());
-//					}
-//
-//					resultsList.add(result);
-//				}
-//			}
-//			return objectMapper;
-//		}
-//		
-		
-		//Sve radi osim Highlights
-//		@PostMapping(value="/advancedBoolean", consumes="application/json")
-//		public ResponseEntity<List<ResultData>> advancedBoolean(@RequestBody List<ExtraAdvancedQuery> advancedQueries) throws Exception {
-//			
-//			List<ResultData> results = new ArrayList<ResultData>();
-//			
-//			for(ExtraAdvancedQuery e : advancedQueries){
-//				System.out.println(e.toString());	
-//			}		
-//			
-//			// 1 polje 
-//			if(advancedQueries.size()==1){
-//				if(advancedQueries.get(0).getType().equals("optional")){ //optional -> match query (ili common terms query)
-//					org.elasticsearch.index.query.QueryBuilder query=
-//							QueryBuilders.commonTermsQuery(advancedQueries.get(0).getField(), advancedQueries.get(0).getValue());
-//				 
-//					List<RequiredHighlight> rh = new ArrayList<RequiredHighlight>();
-//					rh.add(new RequiredHighlight(advancedQueries.get(0).getField(), advancedQueries.get(0).getValue()));
-//					results = resultRetriever.getResults(query, rh);		
-//					System.out.println("[OPTIONAL - BY 1 FIELD] results: " + results.toString());
-//					return new ResponseEntity<List<ResultData>>(results, HttpStatus.OK);
-//					
-//				} else if(advancedQueries.get(0).getType().equals("phrase")){
-//					org.elasticsearch.index.query.QueryBuilder query= QueryBuilder.buildQuery(
-//							SearchType.phrase, advancedQueries.get(0).getField(), obradi(advancedQueries.get(0).getValue()));
-//					List<RequiredHighlight> rh = new ArrayList<RequiredHighlight>();
-//					rh.add(new RequiredHighlight(advancedQueries.get(0).getField(), advancedQueries.get(0).getValue()));
-//					results = resultRetriever.getResults(query, rh);		
-//					System.out.println("[PHRASE - BY 1 FIELD] results: " + results.toString());
-//					return new ResponseEntity<List<ResultData>>(results, HttpStatus.OK);
-//				}
-//				
-//			} else {
-//				for(ExtraAdvancedQuery advancedQuery : advancedQueries){
-//					//za svaki query setujem tip (match ili phrase)
-//					if(advancedQuery.getType().equals("optional")){
-//						advancedQuery.setQuery(QueryBuilders.matchQuery(advancedQuery.getField(), advancedQuery.getValue()));	 
-//					} else if(advancedQuery.getType().equals("phrase")){
-//						advancedQuery.setQuery(QueryBuilders.matchPhraseQuery(advancedQuery.getField(), advancedQuery.getValue())); 
-//					}					
-//				}
-//				
-//				//ako ne razlikujem match i phrase
-////				for(ExtraAdvancedQuery advancedQuery : advancedQueries){
-////					advancedQuery.setQuery(QueryBuilders.commonTermsQuery(advancedQuery.getField(), advancedQuery.getValue()));
-////				}
-//				
-//				BoolQueryBuilder builder = QueryBuilders.boolQuery();
-//				for(ExtraAdvancedQuery advancedQuery : advancedQueries){
-//					if(advancedQuery.getOperation().equals("")){
-//						builder.must(advancedQuery.getQuery());
-//					} else if(advancedQuery.getOperation().equalsIgnoreCase("AND")){
-//						builder.must(advancedQuery.getQuery());
-//					} else if(advancedQuery.getOperation().equalsIgnoreCase("OR")){
-//						builder.should(advancedQuery.getQuery());
-//					} else if(advancedQuery.getOperation().equalsIgnoreCase("NOT")){
-//						builder.mustNot(advancedQuery.getQuery());
-//					}
-//				}
-//		
-//				List<RequiredHighlight> rh = new ArrayList<RequiredHighlight>();
-//				for(ExtraAdvancedQuery advancedQuery : advancedQueries){
-//					rh.add(new RequiredHighlight(advancedQuery.getField(), advancedQuery.getValue()));
-//				}
-//				results = resultRetriever.getResults(builder, rh);			
-//				System.out.println("results are: " + results.toString());
-//				return new ResponseEntity<List<ResultData>>(results, HttpStatus.OK);
-//			}
-//			 
-//
-//			return null;
-//		}
-		
-		
+ 
 		@PostMapping(value="/advancedBoolean", consumes="application/json")
 		public ResponseEntity<List<IndexUnit>> advancedBoolean(@RequestBody List<ExtraAdvancedQuery> advancedQueries) throws Exception {
 			
 			List<IndexUnit> results = new ArrayList<IndexUnit>();
 			List<String> fields = new ArrayList<String>();
-			for(ExtraAdvancedQuery e : advancedQueries){
-				//dodaj u polja za dinamicki sazetak samo ako nije NOT
+			for(ExtraAdvancedQuery e : advancedQueries){ 
 				if(!e.getOperation().equals("NOT")){
 					fields.add(e.getField());
 				}
@@ -364,7 +194,6 @@ public class SearchController {
 			}		
 			
 			for(ExtraAdvancedQuery advancedQuery : advancedQueries){
-				//za svaki query setujem tip (match ili phrase)
 				if(advancedQuery.getType().equals("optional")){
 					advancedQuery.setQuery(QueryBuilders.matchQuery(advancedQuery.getField(), advancedQuery.getValue()));	 
 				} else if(advancedQuery.getType().equals("phrase")){
@@ -429,9 +258,7 @@ public class SearchController {
 
 					if (item.equals("title"))
 						result.setTitle(hit.getHighlightFields().get("title").fragments()[0].string());
-						
-					
-						
+ 			
 					}
 
 					results.add(result);

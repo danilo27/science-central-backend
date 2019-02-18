@@ -40,22 +40,6 @@ public class Magazine implements Serializable{
     @OneToOne(optional = false)
     @JoinColumn(name = "CHIEF_EDITOR", unique = true)
     private Editor editor;
-
-    /**
-     * JoinTable -> Pravi se posebna (intermediary) tabela - MagazineFields
-     *  
-     * JoinColumn -> The name attribute contains the column name of the intermediary table (MAGAZINE)
-     * 
-     * 
-     *  name: This is the name of third table. 
-		joinColumns: Assign the column of third table related to entity itself. 
-		inverseJoinColumns: Assign the column of third table related to associated entity. 
-     * 
-     * 
-     *      
-     *  Naucna oblast moze da bude vezana za vise casopisa i obrnuto -> pa prema tome ManyToMany kojom se pravi posebna tabela uvek
-     *   
-     */
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "MAGAZINE_FIELDS", 
@@ -68,9 +52,7 @@ public class Magazine implements Serializable{
     joinColumns = @JoinColumn(name = "MAGAZINE"),
     inverseJoinColumns = @JoinColumn(name = "PAYMENT_OPTION"))
     private Set<PaymentOption> options = new HashSet<>();
-    
-    
-    
+ 
     public Magazine(){}
 
 	public String getIssn() {
