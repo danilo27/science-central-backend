@@ -1,0 +1,166 @@
+ <div class="text-center" *ngIf="comments.length>0">
+    <h3>Your paper has been reviewed. Please modify it according to suggestions.</h3>
+    <ul>
+    <li *ngFor="let c of comments">
+      <strong>Paper Title: </strong> {{c.paper.title}}<br>
+      <strong>Reviewer's comment: </strong> {{c.comment}}<br> 
+      
+      <hr>
+    </li>
+    </ul>
+    <strong>Create email to notify Editor:</strong><br>
+     <strong>Answer comments and specify the made changes:</strong><br>
+
+      <textarea width=400px; #content></textarea><br><br>
+      <input class="text-center" type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx" >
+    <button class="btn btn-primary text-center" (click)="modify(content.value)">Submit PDF</button>
+
+  </div>
+
+
+<br><hr><br>
+
+<div [ngSwitch]="hasReviews">
+
+<div *ngSwitchCase="'false'">
+
+
+<div [ngSwitch]="show">
+
+
+<div *ngSwitchCase="'all'">
+<ol>
+  <li *ngFor="let m of magazines">
+   
+  
+  <button class="btn btn-link" (click)="goToMagazine(m)"><h3> {{m.name  }}</h3></button><br>
+    <strong>ISBN:</strong> {{m.issn }}<br>
+   <strong>Payment Type:</strong> {{m.paymentType}}<br>
+  <strong> Membership Price:</strong> {{m.membershipPrice}}<br>
+
+  <strong> Chief Editor:</strong>
+   				 {{m.editor.userDetails.firstName}}
+   				 {{m.editor.userDetails.lastName}}
+   				 {{m.editor.userDetails.email}}
+   				 {{m.editor.userDetails.city}}
+   				 {{m.editor.userDetails.country}}
+   				
+   				 
+   <br>
+   <strong>Science Fields:</strong>
+	<ul>
+	  <li *ngFor="let f of m.fields">
+	  	{{f.code}} {{ f.name}}
+		</li>
+	  </ul>
+
+	<strong>Podrzavani Payment Options:</strong>
+	  <ul>
+	  <li *ngFor="let o of m.options">
+	  	{{o.code}} {{o.paymentOptionName}}
+		</li>
+	  </ul>
+
+<hr style ="width: 30% ">
+</li>
+</ol>
+</div>
+
+
+<div *ngSwitchCase="'chosen'">
+<div style="margin: 0 auto; width: 50%;">
+
+<div class="text-center">
+
+<h2> {{m.name  }}</h2> 
+<i>Magazine Details:</i><br><br>
+   <strong>ISBN:</strong> {{m.issn }}<br>
+   <strong>Payment Type:</strong> {{m.paymentType}}<br>
+  <strong> Membership Price:</strong> {{m.membershipPrice}}<br>
+
+  <strong> Chief Editor:</strong>
+           {{m.editor.userDetails.firstName}}
+           {{m.editor.userDetails.lastName}}
+           {{m.editor.userDetails.email}}
+           {{m.editor.userDetails.city}}
+           {{m.editor.userDetails.country}}
+          
+           
+   <br>
+   <strong>Science Fields:</strong>
+  <ul>
+    <li *ngFor="let f of m.fields">
+      {{f.code}} {{ f.name}}
+    </li>
+    </ul>
+
+  <strong>Podrzavani Payment Options:</strong>
+    <ul>
+    <li *ngFor="let o of m.options">
+      {{o.code}} {{o.paymentOptionName}}
+    </li>
+    </ul>
+
+<hr>
+    <div>
+      <h3>Submit a paper to this magazine</h3>
+     
+
+    </div>
+
+  </div>
+
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+<div class="form-group">
+  <div *ngFor="let field of formFields" >
+    <label for={{field.id}}>{{field.label}}</label>
+    <input class="form-control" type="text" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id!='password' && field.id!='binary'"  >
+    <input class="form-control" type="password" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id=='password'" >
+    <input class="form-check-input" type="checkbox" name={{field.id}} ngModel *ngIf="field.type.name=='boolean'">
+    <input class="form-control" type="number" name={{field.id}} ngModel *ngIf="field.type.name=='long'">
+    <select name="field.id" *ngIf="field.type.name=='enum'">
+      <option *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+      </option>
+    </select>
+    <div *ngIf="field.type.name=='string' && field.id=='binary'">
+      <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx" >
+    </div>
+  </div>
+
+</div>
+
+  <button type="submit" class="btn btn-primary text-center">Submit</button>
+</form>
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<div *ngSwitchCase="'true'">
+  <div class="text-center">
+    <ul>
+    <li *ngFor="let c of comments">
+      <strong>Title: </strong> {{c.paper.title}}<br>
+      <strong>Chief Editor's comment: </strong> {{c.comment}}<br>
+      <strong>Correct by: </strong> {{c.deadline}}<br>
+      <button class="btn btn-primary text-center">Submit PDF</button>
+      <hr>
+    </li>
+    </ul>
+    
+
+  </div>
+
+</div>
+
+
+</div>
+

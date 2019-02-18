@@ -1,0 +1,20 @@
+<div style="margin: 0 auto; width: 50%;">
+<form #f="ngForm" (ngSubmit)="onSubmit(username.value, password.value)" ngNativeValidate>
+<div class="form-group">
+ 
+    <label  >Username</label>
+    <input class="form-control" type="text" name="username"  #username>
+    
+     <label  >Password</label>
+    <input class="form-control" type="password" name="password"  #password>
+
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!--
+<button class="btn btn-primary" (click)="getTasks()">Get tasks</button>
+-->
+ 
+</div>

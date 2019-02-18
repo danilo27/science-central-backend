@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <a class="navbar-brand">Sci-Central</a>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
+           
+        </ul>
+         <ul class="nav navbar-nav navbar-right">
+     
+          <li class="nav-item"><a class="nav-link" routerLink="/registrate">Register</a></li>
+           <li class="nav-item"><a class="nav-link" routerLink="/add-udd">Add for UDD</a></li>
+          <li [style.display]="loggedIn() ? 'none' : 'inline'" class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/search">Search</a></li>
+          <li [style.display]="loggedIn() ? 'inline' : 'none'" class="nav-item"><a class="nav-link">Logged in as: {{username}}</a></li>
+          <li  [style.display]="loggedIn() ? 'inline' : 'none'"   class="nav-item">
+            <button 
+            (click)="logout()" class="btn btn-link nav-link">Logout</button></li>
+         	 
+         </ul>
+    </div>
+</nav>
+
+ 

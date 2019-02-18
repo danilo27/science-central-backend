@@ -1,0 +1,37 @@
+<div class="text-center">
+<h2> {{m.name  }}</h2> 
+   <strong>ISBN:</strong> {{m.issn }}<br>
+   <strong>Payment Type:</strong> {{m.paymentType}}<br>
+  <strong> Membership Price:</strong> {{m.membershipPrice}}<br>
+
+  <strong> Chief Editor:</strong>
+   				 {{m.editor.userDetails.firstName}}
+   				 {{m.editor.userDetails.lastName}}
+   				 {{m.editor.userDetails.email}}
+   				 {{m.editor.userDetails.city}}
+   				 {{m.editor.userDetails.country}}
+   				
+   				 
+   <br>
+   <strong>Science Fields:</strong>
+	<ul>
+	  <li *ngFor="let f of m.fields">
+	  	{{f.code}} {{ f.name}}
+		</li>
+	  </ul>
+
+	<strong>Podrzavani Payment Options:</strong>
+	  <ul>
+	  <li *ngFor="let o of m.options">
+	  	{{o.code}} {{o.paymentOptionName}}
+		</li>
+	  </ul>
+
+<hr>
+	  <div>
+	  	<h3>Submit a paper to this magazine</h3>
+		<button class="btn btn-primary">Submit a paper</button>	  	
+
+	  </div>
+
+	</div>

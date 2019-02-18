@@ -1,0 +1,58 @@
+ 
+
+<ol>
+  <li *ngFor="let p of papers_to_approve">
+
+  	<strong>Title:</strong> {{p.title}}<br>
+  	<strong>Abstract:</strong> {{p.abstract}}<br>
+  	<strong>Keywords</strong> {{p.keywords}}<br><br>
+  	<a target="_blank" rel="noopener noreferrer" href="http://localhost:8080/{{field.defaultValue}}">Download</a>
+  	<br><br>
+  	<button class="btn btn-success" (click)="approve(p)">Approve</button> 
+  	<button class="btn btn-warning" (click)="modify(p)">Needs Modification</button> 
+  	<button class="btn btn-danger" (click)="reject(p)">Reject</button> 
+
+
+  	 <div [ngSwitch]="activeEditor">
+
+		<div *ngSwitchCase="'no'">
+
+			<div *ngIf="current == p.id;  then ifcondition"></div>
+
+			<ng-template #ifcondition> 
+
+		<h3>There is no active editors for this field. Please choose reviewers yourself.</h3>
+		
+		  
+		  	 	<ol>
+				  <li *ngFor="let p of papers_to_assign">
+				 
+				  	<button class="btn btn-link" (click)="goToPaper(p)"><h3> {{p.title}}</h3></button><br>
+
+				 
+				<hr>
+				</li>
+				</ol>
+		<hr>
+		
+
+
+</ng-template>
+
+		</div>
+	</div>
+
+  	<hr>
+  </li>
+</ol>
+ 
+<div>
+	<ol>
+	  <li *ngFor="let task of tasks">
+	  	<strong>{{task.name}}</strong>
+	  	
+	  </li>
+	</ol>
+
+</div>
+ 

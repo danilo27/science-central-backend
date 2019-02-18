@@ -1,0 +1,107 @@
+ 
+
+<ol>
+  <li *ngFor="let p of papers_to_assign">
+ 
+  	<button class="btn btn-link" (click)="goToPaper(p)"><h3> {{p.title}}</h3></button><br>
+
+  	<a target="_blank" rel="noopener noreferrer" href="localhost:8080/import.pdf">Download</a>
+  	
+  	 <h4>There are in total <strong>{{reviewers.length}}</strong> reviewers working on the chosen magazine:</h4>
+  	  <h5>Assign atleast two reviewers to review this paper.</h5>
+<select [(ngModel)]="assignedReviewersModel" (change)="printAssigned()" class="selectpicker" name="assigned_reviewers" multiple>
+<option *ngFor="let r of reviewers" value="{{r.user.username}}" >
+{{r.user.username}} - {{r.userDetails.firstName}} {{r.userDetails.lastName}}</option>
+</select>
+<br>
+		<button class="btn btn-primary" (click)="chooseReviewers(p)">Finish</button> 
+ 
+<hr>
+</li>
+</ol>
+
+
+ 
+  
+  	 <h4 *ngIf="reviews.length>0">Finished Reviews from Reviewers</h4> 
+
+<ol>
+  <li *ngFor="let r of reviews">
+  	Paper id: {{r.paper.id}} Title: {{r.paper.title}} <br>
+  	Reviewer's Username: {{r.reviewer}}<br>
+   	Reviewer's Comment: {{r.comment}} <br>
+  	Reviewer's Suggesion: {{r.suggestion}}<br>
+  	Reviewer's Comment For Editor: {{r.commentForEditor}}<hr>
+
+  </li>
+</ol>
+
+
+
+
+
+
+
+
+
+<div *ngIf="reviews.length>0">
+
+ 
+
+<div style="margin: 0 auto; width: 50%;">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+<div class="form-group">
+  <div *ngFor="let field of formFields" >
+    <label for={{field.id}}>{{field.label}}</label>
+    <input class="form-control" type="text" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id!='password' && field.id!='file_url'" placeholder="{{field.defaultValue}}">
+    <input class="form-control" type="password" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id=='password'" >
+    <input   class="form-check-input" type="checkbox" name={{field.id}} ngModel *ngIf="field.type.name=='boolean'">
+    <input class="form-control" type="number" name={{field.id}} ngModel *ngIf="field.type.name=='long'">
+    <select name={{field.id}} *ngIf="field.type.name=='enum'" ngModel style="margin-top: 6px;" >
+      <option *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+      </option>
+    </select>
+
+    <div *ngIf="field.type.name=='string' && field.id=='file_url'">
+ 
+    <a   href="http://localhost:8080/{{field.defaultValue}}"  target="_blank" rel="noopener noreferrer" download>Download</a>
+	</div>
+ 
+  </div>
+
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+<select [(ngModel)]="another" (change)="printAnother()" class="selectpicker" name="another" >
+<option *ngFor="let r of others" value="{{r}}" >
+{{r.user.username}} - {{r.userDetails.firstName}} {{r.userDetails.lastName}}</option>
+</select>
+
+<button class="btn btn-info" (click)="anotherOpinion()">Get opinion from another reviewer</button> 
+
+
+
+</div>
+
+ 
+ 

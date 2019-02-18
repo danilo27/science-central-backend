@@ -1,0 +1,28 @@
+<div style="margin: 0 auto; width: 50%;">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+<div class="form-group">
+  <div *ngFor="let field of formFields" >
+    <label for={{field.id}}>{{field.label}}</label>
+    <input class="form-control" type="text" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id!='password' && field.id!='file_url'" placeholder="{{field.defaultValue}}">
+    <input class="form-control" type="password" name={{field.id}} ngModel *ngIf="field.type.name=='string' && field.id=='password'" >
+    <input   class="form-check-input" type="checkbox" name={{field.id}} ngModel *ngIf="field.type.name=='boolean'">
+    <input class="form-control" type="number" name={{field.id}} ngModel *ngIf="field.type.name=='long'">
+    <select name={{field.id}} *ngIf="field.type.name=='enum'" ngModel style="margin-top: 6px;" >
+      <option *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+      </option>
+    </select>
+
+    <div *ngIf="field.type.name=='string' && field.id=='file_url'">
+ 
+    <a   href="http://localhost:8080/{{field.defaultValue}}"  target="_blank" rel="noopener noreferrer" download>Download</a>
+	</div>
+<!--
+    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx" *ngIf="field.type.name=='binary'"> -->
+  </div>
+
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

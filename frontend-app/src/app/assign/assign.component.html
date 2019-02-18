@@ -1,0 +1,16 @@
+	<div>
+	<h3>{{p.title}}</h3>
+  	<strong>Science Field: </strong> [{{p.field.code}}] {{p.field.name}}<br>
+  	<strong>Abstract: </strong> {{p.paperAbstract}}<br>
+  	<strong>Keywords: </strong> {{p.keywords}}<br>
+  	  <button class="btn btn-primary btn-xs" style="margin-top: 5px;" (click)="download(p)">Download PDF</button><br>
+  	 
+  	 <h4>There are in total <strong>{{reviewers.length}}</strong> reviewers working on the chosen magazine:</h4>
+  	  <h5>Assign atleast two reviewers to review this paper.</h5>
+<select [(ngModel)]="assignedReviewersModel" (change)="printAssigned()" class="selectpicker" name="assigned_reviewers" multiple>
+<option *ngFor="let r of reviewers" value="{{r.user.username}}" >
+{{r.user.username}} - {{r.userDetails.firstName}} {{r.userDetails.lastName}}</option>
+</select>
+<br>
+		<button class="btn btn-primary" (click)="chooseReviewers()">Finish</button> 
+	</div>
