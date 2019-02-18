@@ -1,0 +1,19 @@
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Kermit
+  filter:
+    create: All tasks
+
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false

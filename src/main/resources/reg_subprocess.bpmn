@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_02lsowh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+  <bpmn:process id="Reg_Subprocess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_0a32q6s">
+      <bpmn:outgoing>SequenceFlow_0c46dxb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_14jzwf0">
+      <bpmn:incoming>SequenceFlow_0koc75p</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="ServiceTask_1dsrbq1" name="Creating new user" camunda:class="com.services.RegisterService">
+      <bpmn:incoming>SequenceFlow_0vole4y</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0koc75p</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="UserTask_0vjbhb4" name="Enter Details">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="username" label="Username" type="string" />
+          <camunda:formField id="password" label="Password" type="string" />
+          <camunda:formField id="email" label="Email" type="string" />
+          <camunda:formField id="firstName" label="First Name" type="string" />
+          <camunda:formField id="lastName" label="Last Name" type="string" />
+          <camunda:formField id="city" label="City" type="string" />
+          <camunda:formField id="country" label="Country" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0c46dxb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vole4y</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0c46dxb" sourceRef="StartEvent_0a32q6s" targetRef="UserTask_0vjbhb4" />
+    <bpmn:sequenceFlow id="SequenceFlow_0koc75p" sourceRef="ServiceTask_1dsrbq1" targetRef="EndEvent_14jzwf0" />
+    <bpmn:sequenceFlow id="SequenceFlow_0vole4y" sourceRef="UserTask_0vjbhb4" targetRef="ServiceTask_1dsrbq1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Reg_Subprocess">
+      <bpmndi:BPMNShape id="StartEvent_0a32q6s_di" bpmnElement="StartEvent_0a32q6s">
+        <dc:Bounds x="555" y="211" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_14jzwf0_di" bpmnElement="EndEvent_14jzwf0">
+        <dc:Bounds x="877" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1dsrbq1_di" bpmnElement="ServiceTask_1dsrbq1">
+        <dc:Bounds x="739" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0vjbhb4_di" bpmnElement="UserTask_0vjbhb4">
+        <dc:Bounds x="615" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0c46dxb_di" bpmnElement="SequenceFlow_0c46dxb">
+        <di:waypoint x="591" y="229" />
+        <di:waypoint x="603" y="229" />
+        <di:waypoint x="603" y="230" />
+        <di:waypoint x="615" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0koc75p_di" bpmnElement="SequenceFlow_0koc75p">
+        <di:waypoint x="839" y="230" />
+        <di:waypoint x="877" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vole4y_di" bpmnElement="SequenceFlow_0vole4y">
+        <di:waypoint x="715" y="230" />
+        <di:waypoint x="739" y="230" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
